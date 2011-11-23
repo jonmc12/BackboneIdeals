@@ -1,1 +1,57 @@
-My GitHub Page
+<!DOCTYPE html>  <html> <head>   <title>backbone_ideals.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               backbone_ideals.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>I think in terms of content and interaction I want to deliver to the user.  User interaction controls content rendered/displayed.  </p>
+
+<p>A nice conceptual model would be a rest interface equivalent between the user and the DOM - a nice convention that allows me to enumerate and get explicit about the CRUD functions that occur to content as through the user's interaction with the DOM.</p>
+
+<p>I think of the DOM events as API calls, and the DOM rendering as the data return / error handling.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>When model changes, HTML changes.  When HTML changes through user interaction (ie, event), model updates.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>View model interaction functions:
+  Explicit handling of jquery events including a namespace so I can bind multiple events to a single dom element.    </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">incomeViewModel = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">Extend</span>    
+  <span class="nv">events:</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>format: domEl event(key).nameSpace: function</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">input</span> <span class="nx">keyDown</span><span class="p">(</span><span class="s2">&quot;Enter&quot;</span><span class="p">).</span><span class="nv">submitTotal  : </span><span class="nx">triggerCallbackWithValidation</span>
+    <span class="nx">button</span> <span class="nv">click.submitTotal            : </span><span class="nx">triggerCallback</span>
+    <span class="nx">input</span> <span class="nx">keyUp</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">).</span><span class="nv">capitalize         : </span><span class="nx">triggerCapital</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>each callback function should render data to dom in following forms.  I think each interaction could be constrained to one of the following:
+ * Create: Create DOM element for view Model
+ * Read:   Render DOM Element - for showing / hiding stuff
+ * Update: HTML content updates models per user interaction, then renders accordingly
+ * Delete: Delete DOM element</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>View model content functions example:
+Create:</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">incomeViewModel = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">Extend</span>
+  <span class="nv">el: </span><span class="s2">&quot;#income&quot;</span>
+  <span class="nv">templates:</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>name whereToAppend: sourceHTML </p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="s2">&quot;total .sum:last&quot;</span><span class="o">:</span><span class="s2">&quot;#totalTemplate&quot;</span>
+    <span class="s2">&quot;subtotal .sum&quot;</span><span class="o">:</span><span class="s2">&quot;#subtotalTemplate&quot;</span>
+  <span class="nv">create: </span><span class="nf">(newEl) -&gt;</span> <span class="c1"># this function would append the template element to someplace within $(@el)</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>ie, @create("total")                  </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="s1">&#39;&#39;&#39; Example HTML Template:</span>
+<span class="s1">               </span>
+<span class="s1">  &lt;div id=&quot;incomeTemplate&quot; style=&quot;display:none;&quot;&gt;</span>
+<span class="s1">    &lt;span class=&quot;total&quot;&gt;{&quot;$&quot;+$model.total}&lt;/span&gt;</span>
+<span class="s1">  &lt;/div&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span>  </pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Display: shows and hides HTML based on user interaction</p>             </td>             <td class="code">               <div class="highlight"><pre>    </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Rendering: maps data model to presentable content formats under a single design pattern.  render = HTML template + representations of assiated data model(s)  </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">incomeViewModel = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">Extend</span>
+  <span class="nv">el: </span><span class="s2">&quot;#income&quot;</span>
+  <span class="nv">model: </span><span class="nx">incomeModel</span>
+  
+<span class="s1">&#39;&#39;&#39; Example HTML Template:</span>
+
+<span class="s1">  &lt;span id=&quot;#income&quot;&gt;{&quot;$&quot;+$model.total}&lt;/span&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nv">expenseViewModel = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">Extend</span>
+  <span class="nv">el: </span><span class="s2">&quot;#expenses&quot;</span>
+  <span class="nv">model: </span><span class="nx">expenseModel</span>
+  
+<span class="s1">&#39;&#39;&#39; Example HTML Template:</span>
+
+<span class="s1">  &lt;div id=&quot;expenses&quot;&gt;</span>
+<span class="s1">    &lt;span class=&quot;discretionary&quot;&gt;#{&quot;$&quot;+$model.discretionary}&lt;/span&gt;</span>
+<span class="s1">    &lt;span class=&quot;fixed&quot;&gt;#{&quot;$&quot;+$model.fixed}&lt;/span&gt;</span>
+<span class="s1">  &lt;/div&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span>  </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>So, I've got one format for simple presentations like "$100.00", or for generating complete html nodes like #expenses.  The view model methods available to everything in $(incomeViewModel.el).  </p>
+
+<p>Lets say that expenseViewModel actually has a collection of fixedExpenses this time.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nv">expenseViewModel = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">Extend</span>
+  <span class="nv">el: </span><span class="s2">&quot;#expenses&quot;</span>
+  <span class="nv">collection: </span><span class="nx">fixedExpenses</span>
+  <span class="nv">collectionEl: </span><span class="s2">&quot;#fixedExpenses&quot;</span>
+  
+<span class="s1">&#39;&#39;&#39; Example HTML Template:</span>
+<span class="s1">  &lt;div id=&quot;expenses&quot;&gt;</span>
+<span class="s1">    &lt;ul id=&quot;fixedExpenses&quot;&gt;</span>
+<span class="s1">      &lt;li class=&quot;fixed&quot;&gt;#{&quot;$&quot;+$model.fixed}&lt;/span&gt;</span>
+<span class="s1">    &lt;/li&gt;</span>
+<span class="s1">  &lt;/div&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span> 
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html>
